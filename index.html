@@ -413,6 +413,7 @@
 
   /* ── Language switcher ── */
   const langs = {
+    // standard english
     en: {
       greetSmall:  'How can we help you,',
       sosLabel:    'I am in Trouble!',
@@ -425,6 +426,7 @@
       emergSub:    'Nigeria: 199 · Police: 112 · Ambulance: 115',
       // tabHome: 'Home', tabMap: 'Map', tabContacts: 'Contacts', tabReport: 'Report', tabSettings: 'Settings',
     },
+    //pidgin english (Nigeria)
     pcm: {
       greetSmall:  'How you dey,',
       sosLabel:    'Wahala!',
@@ -437,6 +439,7 @@
       emergSub:    'Nigeria: 199 · Police: 112 · Ambulance: 115',
       // tabHome: 'Home', tabMap: 'Map', tabContacts: 'Contacts', tabReport: 'Report', tabSettings: 'Settings',
     },
+    // kiswahili (Kenya)
     ksw: {
       greetSmall:  'Habari yako,',
       sosLabel:    'Niko Hatarini!',
@@ -455,6 +458,7 @@
 
   function setLang(lang, el) {
     currentLang = lang;
+    localStorage.setItem('lang', lang);
     document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
     el.classList.add('active');
     const t = langs[lang];

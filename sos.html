@@ -379,6 +379,98 @@
 </div>
 
 <script>
+/* ── Language ── */
+const langs = {
+  en: {
+    title1:    'Are you really in trouble?',
+    sub1:      'Only continue if you are genuinely in danger.\nA false alarm can delay help for others who really need it.',
+    btnYes:    '🆘 Yes, I need help now!',
+    btnNo:     'No, take me back',
+    title2:    'Add a message',
+    sub2:      'This is optional. Your location will be sent automatically.',
+    msgLabel:  'What is happening? (optional)',
+    notifyLbl: 'Alert will be sent to',
+    notify1:   'Your Parent / Guardian',
+    notify2:   'Nearest Police Station',
+    btnSend:   '🚨 Send SOS Now',
+    btnSkip:   'Skip message — just send my location',
+    sending:   'Sending SOS...',
+    sendingSub:'Please wait.\nDo not close this screen.',
+    confirmed: 'Help is on the way!',
+    confSub:   'Stay where you are if it is safe to do so. Help has been notified and is coming.',
+    check1:    'Parent / Guardian notified',
+    check2:    'Police notified',
+    check3:    'Your location shared',
+    btnHome:   'OK, I understand',
+  },
+  pcm: {
+    title1:    'You dey real trouble?',
+    sub1:      'Only continue if you truly dey danger.\nFalse alarm go delay help for people wey really need am.',
+    btnYes:    '🆘 Yes! I need help now!',
+    btnNo:     'No, carry me back',
+    title2:    'Add message',
+    sub2:      'No worry, e no compulsory. Your location go send automatically.',
+    msgLabel:  'Wetin dey happen? (optional)',
+    notifyLbl: 'Alert go reach',
+    notify1:   'Your Parent / Guardian',
+    notify2:   'Police Station wey dey near',
+    btnSend:   '🚨 Send SOS Now',
+    btnSkip:   'Skip — just send my location',
+    sending:   'E dey send...',
+    sendingSub:'Wait small.\nDo not close this screen.',
+    confirmed: 'Help dey come!',
+    confSub:   'Stay wia you dey if e safe. Help don hear you.',
+    check1:    'Parent / Guardian don hear',
+    check2:    'Police don hear',
+    check3:    'Your location don share',
+    btnHome:   'OK, I understand',
+  },
+  ksw: {
+    title1:    'Uko hatarini kweli?',
+    sub1:      'Endelea tu kama uko hatarini kweli kweli.\nTaarifa ya uongo inaweza kuchelewa msaada kwa wengine.',
+    btnYes:    '🆘 Ndiyo, nahitaji msaada!',
+    btnNo:     'Hapana, nirudishe nyuma',
+    title2:    'Ongeza ujumbe',
+    sub2:      'Hii si lazima. Mahali pako patatumwa moja kwa moja.',
+    msgLabel:  'Kinachoendelea? (si lazima)',
+    notifyLbl: 'Tahadhari itatumwa kwa',
+    notify1:   'Mzazi / Mlezi wako',
+    notify2:   'Kituo cha Polisi karibu nawe',
+    btnSend:   '🚨 Tuma SOS Sasa',
+    btnSkip:   'Ruka — tuma mahali pangu tu',
+    sending:   'Inatuma SOS...',
+    sendingSub:'Tafadhali subiri.\nUsifunge skrini hii.',
+    confirmed: 'Msaada unakuja!',
+    confSub:   'Kaa mahali ulipo kama ni salama. Msaada umearifiwa.',
+    check1:    'Mzazi / Mlezi amearifiwa',
+    check2:    'Polisi amearifiwa',
+    check3:    'Mahali pako pametumwa',
+    btnHome:   'Sawa, ninaelewa',
+  }
+};
+
+function setLang(lang) {
+  const t = langs[lang];
+  document.querySelector('#section-1 .section-title').textContent  = t.title1;
+  document.querySelector('#section-1 .section-sub').textContent    = t.sub1;
+  document.querySelector('.btn-yes').textContent                   = t.btnYes;
+  document.querySelector('.btn-no').textContent                    = t.btnNo;
+  document.querySelector('#section-2 .section-title').textContent  = t.title2;
+  document.querySelector('#section-2 .section-sub').textContent    = t.sub2;
+  document.querySelector('.msg-label').textContent                 = t.msgLabel;
+  document.querySelector('.notify-who-label').textContent          = t.notifyLbl;
+  document.querySelectorAll('.notify-row span:last-child')[0].textContent = t.notify1;
+  document.querySelectorAll('.notify-row span:last-child')[1].textContent = t.notify2;
+  document.querySelector('.btn-send').textContent                  = t.btnSend;
+  document.querySelector('.btn-skip').textContent                  = t.btnSkip;
+  document.querySelector('.btn-home').textContent                  = t.btnHome;
+  document.querySelector('.confirmed-title').textContent           = t.confirmed;
+  document.querySelector('.confirmed-sub').textContent             = t.confSub;
+  document.querySelectorAll('.confirm-item span')[0].textContent   = t.check1;
+  document.querySelectorAll('.confirm-item span')[1].textContent   = t.check2;
+  document.querySelectorAll('.confirm-item span')[2].textContent   = t.check3;
+}
+
   /* ── Section navigation ── */
   function showSection(id) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -423,6 +515,10 @@
       document.getElementById('confirmed-state').style.alignItems = 'center';
     }, 2000);
   }
+
+  /* ── Apply selected language when page is loaded ── */
+const savedLang = localStorage.getItem('lang') || 'en';
+setLang(savedLang);
 </script>
 </body>
 </html>
