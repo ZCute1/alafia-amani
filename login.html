@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Alafia Amani – Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #FFF8F0;
+      --bg2:       #F5F5F5;
+      --bg3:       #FFE8D0;
+      --accent:    #FF8A3D;
+      --accent2:   #E63946;
+      --blue:      #06AED5;
+      --teal:      #2EC4B6;
+      --text:      #2D3142;
+      --muted:     #8A8FA8;
+      --card:      #FFFFFF;
+      --radius:    16px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .shell {
+      max-width: 390px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* top decorative blob */
+    .blob {
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255,138,61,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .blob2 {
+      position: absolute;
+      bottom: 80px;
+      left: -80px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(6,174,213,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* ── Header / logo area ── */
+    .header {
+      padding: 60px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeUp 0.5s ease both 0.05s;
+    }
+
+    .logo-ring {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(255,138,61,0.35);
+    }
+
+    .app-name {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+    .app-name span { color: var(--accent); }
+
+    .app-tagline {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ── Role toggle ── */
+    .role-wrap {
+      padding: 0 24px 24px;
+      animation: fadeUp 0.5s ease both 0.15s;
+    }
+    .role-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .role-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg2);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 4px;
+    }
+    .role-btn {
+      padding: 10px;
+      border: none;
+      border-radius: 9px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: transparent;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .role-btn.active {
+      background: var(--card);
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .role-btn .role-icon { font-size: 16px; }
+
+    /* ── Form card ── */
+    .form-card {
+      margin: 0 24px;
+      background: var(--card);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 4px 24px rgba(45,49,66,0.08);
+      animation: fadeUp 0.5s ease both 0.25s;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #E8EAF0;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,138,61,0.12);
+    }
+    .form-group input::placeholder {
+      color: #C8CACE;
+      font-weight: 600;
+    }
+
+    /* password wrapper */
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 44px; }
+    .pw-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0;
+    }
+
+    /* forgot password */
+    .forgot {
+      text-align: right;
+      margin-top: -8px;
+      margin-bottom: 20px;
+    }
+    .forgot a {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    /* login button */
+    .btn-login {
+      width: 100%;
+      padding: 15px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 6px 20px rgba(255,138,61,0.4);
+      letter-spacing: 0.5px;
+    }
+    .btn-login:active { transform: scale(0.98); }
+    .btn-login:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* error message */
+    .error-msg {
+      background: #FFF0F0;
+      border: 1px solid #FFCDD0;
+      border-radius: 10px;
+      color: var(--accent2);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #E8EAF0;
+    }
+    .divider span {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    /* USSD note */
+    .ussd-note {
+      background: var(--bg3);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .ussd-note:active { background: #ffd9b3; }
+    .ussd-icon { font-size: 20px; }
+    .ussd-text strong { font-size: 12px; font-weight: 800; color: var(--text); display: block; }
+    .ussd-text span   { font-size: 11px; font-weight: 600; color: var(--muted); }
+
+    /* ── Sign up link ── */
+    .signup-row {
+      text-align: center;
+      padding: 24px 24px 40px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      animation: fadeUp 0.5s ease both 0.35s;
+    }
+    .signup-row a {
+      color: var(--accent);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    /* ── Language pills (bottom) ── */
+    .lang-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 24px 32px;
+      animation: fadeUp 0.5s ease both 0.4s;
+    }
+    .lang-pill {
+      background: var(--bg2);
+      border: 1px solid #E8EAF0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-pill.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* loading spinner on button */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="blob"></div>
+  <div class="blob2"></div>
+
+  <!-- Logo / header -->
+  <div class="header">
+    <div class="logo-ring">🛡️</div>
+    <div class="app-name">Alafia <span>Amani</span></div>
+    <div class="app-tagline">Safety in your hands. Help is always near.</div>
+  </div>
+
+  <!-- Role toggle -->
+  <div class="role-wrap">
+    <div class="role-label">I am a</div>
+    <div class="role-toggle">
+      <button class="role-btn active" id="role-child" onclick="setRole('child')">
+        <span class="role-icon">🧒</span> Child
+      </button>
+      <button class="role-btn" id="role-parent" onclick="setRole('parent')">
+        <span class="role-icon">👨‍👩‍👧</span> Parent / Guardian
+      </button>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-card">
+    <div class="error-msg" id="error-msg">⚠️ Incorrect email or password. Please try again.</div>
+
+    <div class="form-group">
+      <label>Email address</label>
+      <input type="email" id="email" placeholder="you@example.com" autocomplete="email"/>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <div class="pw-wrap">
+        <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password"/>
+        <button class="pw-toggle" onclick="togglePw()" id="pw-eye">👁️</button>
+      </div>
+    </div>
+
+    <div class="forgot"><a href="forgot.html">Forgot password?</a></div>
+
+    <button class="btn-login" id="login-btn" onclick="doLogin()">Log In</button>
+
+    <div class="divider"><span>no smartphone?</span></div>
+
+    <div class="ussd-note" onclick="alert('Dial *384# on any phone to access Alafia Amani via USSD')">
+      <span class="ussd-icon">📱</span>
+      <div class="ussd-text">
+        <strong>Use USSD on any phone</strong>
+        <span>Dial *384# — works on Nokia &amp; feature phones</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign up link -->
+  <div class="signup-row">
+    New here? <a href="signup.html">Create an account</a>
+  </div>
+
+  <!-- Language switcher -->
+  <div class="lang-row">
+    <div class="lang-pill active" onclick="setLang('en', this)">English</div>
+    <div class="lang-pill" onclick="setLang('pcm', this)">Pidgin</div>
+    <div class="lang-pill" onclick="setLang('ksw', this)">Kiswahili</div>
+  </div>
+
+</div>
+
+<script>
+  /* ── Role toggle ── */
+  let currentRole = 'child';
+  function setRole(role) {
+    currentRole = role;
+    document.getElementById('role-child').classList.toggle('active', role === 'child');
+    document.getElementById('role-parent').classList.toggle('active', role === 'parent');
+  }
+
+  /* ── Show/hide password ── */
+  function togglePw() {
+    const inp = document.getElementById('password');
+    const eye = document.getElementById('pw-eye');
+    if (inp.type === 'password') {
+      inp.type = 'text';
+      eye.textContent = '🙈';
+    } else {
+      inp.type = 'password';
+      eye.textContent = '👁️';
+    }
+  }
+
+  /* ── Login handler ── */
+  function doLogin() {
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const btn      = document.getElementById('login-btn');
+    const err      = document.getElementById('error-msg');
+
+    err.classList.remove('show');
+
+    if (!email || !password) {
+      err.textContent = '⚠️ Please enter your email and password.';
+      err.classList.add('show');
+      return;
+    }
+
+    // Show loading state
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Logging in...';
+
+    // TODO: Replace this with Firebase auth call
+    // firebase.auth().signInWithEmailAndPassword(email, password)
+    //   .then(() => window.location.href = 'home.html')
+    //   .catch(e => { showError(e.message); })
+
+    // Placeholder: simulate login after 1.5s
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = 'Log In';
+      // For now just go to home — remove this when Firebase is connected
+      window.location.href = 'home.html';
+    }, 1500);
+  }
+
+  function showError(msg) {
+    const btn = document.getElementById('login-btn');
+    const err = document.getElementById('error-msg');
+    btn.disabled = false;
+    btn.innerHTML = 'Log In';
+    err.textContent = '⚠️ ' + msg;
+    err.classList.add('show');
+  }
+
+  /* ── Allow Enter key to submit ── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  /* ── Language switcher ── */
+  const langs = {
+    en: {
+      tagline:    'Safety in your hands. Help is always near.',
+      roleLabel:  'I am a',
+      roleChild:  'Child',
+      roleParent: 'Parent / Guardian',
+      emailLabel: 'Email address',
+      pwLabel:    'Password',
+      forgot:     'Forgot password?',
+      loginBtn:   'Log In',
+      ussdTitle:  'Use USSD on any phone',
+      ussdSub:    'Dial *384# — works on Nokia & feature phones',
+      noAccount:  'New here?',
+      signupLink: 'Create an account',
+      divider:    'no smartphone?',
+    },
+    pcm: {
+      tagline:    'Help dey near you. You no dey alone.',
+      roleLabel:  'I be',
+      roleChild:  'Pikin',
+      roleParent: 'Papa / Mama',
+      emailLabel: 'Your email',
+      pwLabel:    'Password',
+      forgot:     'You forget password?',
+      loginBtn:   'Enter',
+      ussdTitle:  'No get smartphone?',
+      ussdSub:    'Dial *384# — e work for Nokia too',
+      noAccount:  'New here?',
+      signupLink: 'Register now',
+      divider:    'no get smartphone?',
+    },
+    ksw: {
+      tagline:    'Usalama mikononi mwako. Msaada uko karibu.',
+      roleLabel:  'Mimi ni',
+      roleChild:  'Mtoto',
+      roleParent: 'Mzazi / Mlezi',
+      emailLabel: 'Barua pepe',
+      pwLabel:    'Nenosiri',
+      forgot:     'Umesahau nenosiri?',
+      loginBtn:   'Ingia',
+      ussdTitle:  'Tumia USSD kwenye simu yoyote',
+      ussdSub:    'Piga *384# — inafanya kazi Nokia pia',
+      noAccount:  'Mpya hapa?',
+      signupLink: 'Fungua akaunti',
+      divider:    'huna smartphone?',
+    }
+  };
+
+  let currentLang = 'en';
+  function setLang(lang, el) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    const t = langs[lang];
+    document.querySelector('.app-tagline').textContent       = t.tagline;
+    document.querySelector('.role-label').textContent        = t.roleLabel;
+    document.getElementById('role-child').innerHTML          = `<span class="role-icon">🧒</span> ${t.roleChild}`;
+    document.getElementById('role-parent').innerHTML         = `<span class="role-icon">👨‍👩‍👧</span> ${t.roleParent}`;
+    document.querySelector('[for="email"], label').textContent = t.emailLabel;
+    document.getElementById('login-btn').textContent         = t.loginBtn;
+    document.querySelector('.forgot a').textContent          = t.forgot;
+    document.querySelector('.ussd-text strong').textContent  = t.ussdTitle;
+    document.querySelector('.ussd-text span').textContent    = t.ussdSub;
+    document.querySelector('.divider span').textContent      = t.divider;
+  }
+</script>
+</body>
+</html>
