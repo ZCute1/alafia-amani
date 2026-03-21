@@ -304,7 +304,7 @@
             stroke-linecap="round"/>
         </svg>
         <span class="sos-label" id="sos-label">SOS</span>
-        <span class="sos-sub" id="sos-label">I am in trouble</span>
+        <span class="sos-sub" id="sos-trouble">I am in trouble</span>
         <span class="sos-sub"  id="sos-sub">HOLD 3 SEC</span>
       </button>
     </div>
@@ -382,16 +382,7 @@
 </div>
  
 <script>
-  /* ── Live clock ── */
-  function updateClock() {
-    const now = new Date();
-    let h = now.getHours(), m = now.getMinutes();
-    document.getElementById('time-display').textContent =
-      `${h}:${m.toString().padStart(2,'0')}`;
-  }
-  updateClock();
-  setInterval(updateClock, 10000);
- 
+
   /* ── SOS hold logic (3 seconds) ── */
   let holdTimer = null;
   let animFrame = null;
