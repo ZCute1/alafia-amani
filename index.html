@@ -296,7 +296,159 @@
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-  </style>
+
+    /* ── SOS Overlays ── */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(45,49,66,0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .overlay.show { display: flex; }
+
+  .overlay-card {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 28px 24px;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .overlay-icon { font-size: 48px; margin-bottom: 12px; }
+  .overlay-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .overlay-sub {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .overlay-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .btn-cancel {
+    padding: 13px;
+    background: var(--bg2);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .btn-confirm {
+    padding: 13px;
+    background: var(--accent2);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(230,57,70,0.35);
+  }
+  .btn-full {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent2);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(230,57,70,0.35);
+    margin-top: 4px;
+  }
+  .btn-skip {
+    width: 100%;
+    padding: 11px;
+    background: none;
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    cursor: pointer;
+    margin-top: 6px;
+  }
+  .msg-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #E8EAF0;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    resize: none;
+    margin-bottom: 4px;
+  }
+  .msg-input:focus { border-color: var(--accent); }
+  .location-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #E8F8F0;
+    border: 1px solid #B2DFCF;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 18px;
+  }
+  .notify-list {
+    text-align: left;
+    margin: 16px 0;
+  }
+  .notify-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F0F0F0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .notify-item:last-child { border-bottom: none; }
+  .notify-check {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #E8F8F0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner {
+    display: inline-block;
+    width: 36px; height: 36px;
+    border: 3px solid rgba(230,57,70,0.2);
+    border-top-color: var(--accent2);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 14px;
+  }
+</style>
 </head>
 <body>
 <div class="shell">
@@ -457,7 +609,7 @@
     },
     pcm: {
       greetSmall:  'How you dey,',
-      sosLabel:    'I Dey Trouble!',
+      sosLabel:    'Wahala!',
       sosSub:      'PRESS AM WELL',
       sosHint:     'E go tell your parent + police wia you dey',
       btnTalk:     'I Wan Talk',
