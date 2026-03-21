@@ -382,13 +382,13 @@
 /* ── Language ── */
 const langs = {
   en: {
-    title1:    'Are you really in trouble?',
-    sub1:      'Only continue if you are genuinely in danger.\nA false alarm can delay help for others who really need it.',
+    title1:    '🚨 Wait! Are you really in trouble?',
+    sub1:      'Only continue if you are truly in danger.\nIf you are safe right now, please don\'t tap! We want the Helpers to be able to reach everyone fast.',
     btnYes:    '🆘 Yes, I need help now!',
     btnNo:     'No, take me back',
     title2:    'Add a message',
     sub2:      'This is optional. Your location will be sent automatically.',
-    msgLabel:  'What is happening? (optional)',
+    msgLabel:  'What\'s going on (optional)',
     notifyLbl: 'Alert will be sent to',
     notify1:   'Your Parent / Guardian',
     notify2:   'Nearest Police Station',
@@ -404,12 +404,12 @@ const langs = {
     btnHome:   'OK, I understand',
   },
   pcm: {
-    title1:    'You dey real trouble?',
-    sub1:      'Only continue if you truly dey danger.\nFalse alarm go delay help for people wey really need am.',
-    btnYes:    '🆘 Yes! I need help now!',
+    title1:    '🚨 You dey for serious wahala?',
+    sub1:      'Press only if you dey real danger.\nIf no be true, e fit delay help for people wey really need am.',
+    btnYes:    '🆘 Yes! I dey for serious trouble!',
     btnNo:     'No, carry me back',
     title2:    'Add message',
-    sub2:      'No worry, e no compulsory. Your location go send automatically.',
+    sub2:      'No worry, e no be by force. Your location go send automatically.',
     msgLabel:  'Wetin dey happen? (optional)',
     notifyLbl: 'Alert go reach',
     notify1:   'Your Parent / Guardian',
@@ -423,7 +423,7 @@ const langs = {
     check1:    'Parent / Guardian don hear',
     check2:    'Police don hear',
     check3:    'Your location don share',
-    btnHome:   'OK, I understand',
+    btnHome:   'OK, I get am',
   },
   ksw: {
     title1:    'Uko hatarini kweli?',
@@ -517,8 +517,8 @@ function setLang(lang) {
   }
 
   /* ── Apply selected language when page is loaded ── */
-const savedLang = localStorage.getItem('lang') || 'en';
-setLang(savedLang);
+  const savedLang = localStorage.getItem('lang') || 'en';
+  setLang(savedLang);
 </script>
 </body>
 </html>

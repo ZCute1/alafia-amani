@@ -1,0 +1,444 @@
+<!--emergency hotline details-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Alafia Amani Emergency Lines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #FFF8F0;
+      --bg2:     #F5F5F5;
+      --bg3:     #FFE8D0;
+      --accent:  #FF8A3D;
+      --red:     #E63946;
+      --teal:    #2EC4B6;
+      --blue:    #06AED5;
+      --yellow:  #FFD166;
+      --purple:  #9381FF;
+      --text:    #2D3142;
+      --muted:   #8A8FA8;
+      --card:    #FFFFFF;
+      --radius:  16px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .shell {
+      max-width: 390px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 32px;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 20px 10px;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+    .back-btn {
+      background: var(--bg2);
+      border: none;
+      border-radius: 10px;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .page-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    /* ── Country toggle ── */
+    .country-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg2);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 4px;
+      margin: 8px 20px 16px;
+    }
+    .country-btn {
+      padding: 10px;
+      border: none;
+      border-radius: 9px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: transparent;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .country-btn.active {
+      background: var(--card);
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    /* ── Section heading ── */
+    .section-heading {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0 20px 8px;
+    }
+
+    /* ── Agency card ── */
+    .agency-card {
+      margin: 0 16px 12px;
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1.5px solid #E8EAF0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(45,49,66,0.06);
+    }
+
+    .agency-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .agency-main:active { background: var(--bg); }
+
+    .agency-icon {
+      width: 46px; height: 46px;
+      border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .agency-info { flex: 1; }
+    .agency-name {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .agency-desc {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .agency-number {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* expanded info panel */
+    .agency-detail {
+      display: none;
+      border-top: 1px solid #F0F0F0;
+      padding: 14px 16px;
+      background: var(--bg);
+    }
+    .agency-detail.open { display: block; }
+
+    .detail-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .call-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .call-btn:active { background: #c0303a; }
+
+    /* colour variants for icons */
+    .ic-red    { background: #FFEBEC; }
+    .ic-blue   { background: #E3F4FB; }
+    .ic-orange { background: #FFF3E0; }
+    .ic-teal   { background: #E0F7F4; }
+    .ic-purple { background: #F0EEFF; }
+    .ic-yellow { background: #FFFDE7; }
+
+    /* ── Country sections ── */
+    .country-section { display: none; }
+    .country-section.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .agency-card { animation: fadeUp 0.3s ease both; }
+    .agency-card:nth-child(2) { animation-delay: 0.05s; }
+    .agency-card:nth-child(3) { animation-delay: 0.10s; }
+    .agency-card:nth-child(4) { animation-delay: 0.15s; }
+    .agency-card:nth-child(5) { animation-delay: 0.20s; }
+    .agency-card:nth-child(6) { animation-delay: 0.25s; }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <a class="back-btn" href="index.html">←</a>
+    <div class="page-title">🚨 Emergency Lines</div>
+  </div>
+
+  <!-- Country toggle -->
+  <div class="country-toggle">
+    <button class="country-btn active" id="btn-ng" onclick="setCountry('ng')">🇳🇬 Nigeria</button>
+    <button class="country-btn" id="btn-ke" onclick="setCountry('ke')">🇰🇪 Kenya</button>
+  </div>
+
+  <!-- ── NIGERIA ── -->
+  <div class="country-section active" id="section-ng">
+
+    <div class="section-heading">Emergency Services — Nigeria</div>
+
+    <!-- Police -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-blue">🚔</div>
+        <div class="agency-info">
+          <div class="agency-name">Nigeria Police</div>
+          <div class="agency-desc">Crime, danger & security emergencies</div>
+        </div>
+        <div class="agency-number">112</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">The Nigeria Police Force responds to crimes, threats, violence and security emergencies. Call them if you are being followed, attacked, or witness a crime. They are available 24 hours a day.</div>
+        <a class="call-btn" href="tel:112">📞 Call 112 — Nigeria Police</a>
+      </div>
+    </div>
+
+    <!-- Ambulance -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-red">🚑</div>
+        <div class="agency-info">
+          <div class="agency-name">Ambulance Service</div>
+          <div class="agency-desc">Medical emergencies & injuries</div>
+        </div>
+        <div class="agency-number">115</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">Call for urgent medical help — if someone is injured, unconscious, or very sick. Trained paramedics will come to you with medical equipment and take the person to the nearest hospital.</div>
+        <a class="call-btn" href="tel:115">📞 Call 115 — Ambulance</a>
+      </div>
+    </div>
+
+    <!-- Fire Service -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-orange">🚒</div>
+        <div class="agency-info">
+          <div class="agency-name">Fire Service</div>
+          <div class="agency-desc">Fires & rescue operations</div>
+        </div>
+        <div class="agency-number">01-7944929</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">The Federal Fire Service puts out fires and rescues people from dangerous situations. If you see a fire — in a building, market, or vehicle — call them immediately and move away from the area.</div>
+        <a class="call-btn" href="tel:017944929">📞 Call Fire Service</a>
+      </div>
+    </div>
+
+    <!-- NAPTIP -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-purple">🛑</div>
+        <div class="agency-info">
+          <div class="agency-name">NAPTIP</div>
+          <div class="agency-desc">Child trafficking & exploitation</div>
+        </div>
+        <div class="agency-number">0800-770-0800</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">NAPTIP (National Agency for the Prohibition of Trafficking in Persons) protects children and adults from being trafficked or exploited. If someone is trying to take you somewhere against your will, or offering you a "job" that feels wrong — call them. The hotline is free and available 24/7.</div>
+        <a class="call-btn" href="tel:08007700800">📞 Call NAPTIP Hotline</a>
+      </div>
+    </div>
+
+    <!-- Sexual assault -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-teal">💜</div>
+        <div class="agency-info">
+          <div class="agency-name">Sexual Assault Helpline</div>
+          <div class="agency-desc">Safe, confidential support</div>
+        </div>
+        <div class="agency-number">0800-033-3</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">Project Alert on Violence Against Women provides free, confidential help for survivors of sexual assault or abuse. You can call if something has happened to you, or if you are afraid. You will not be judged. They can connect you with a safe place, medical help, and legal support.</div>
+        <a class="call-btn" href="tel:01-8930741">📞 Call Sexual Assault Helpline</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── KENYA ── -->
+  <div class="country-section" id="section-ke">
+
+    <div class="section-heading">Emergency Services — Kenya</div>
+
+    <!-- Police -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-blue">🚔</div>
+        <div class="agency-info">
+          <div class="agency-name">Kenya Police</div>
+          <div class="agency-desc">Crime, danger & security emergencies</div>
+        </div>
+        <div class="agency-number">999</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">The Kenya Police Service responds to crimes, threats, and violence. Call 999 if you are in immediate danger, being followed, or witnessing a crime. Available 24 hours a day nationwide.</div>
+        <a class="call-btn" href="tel:999">📞 Call 999 — Kenya Police</a>
+      </div>
+    </div>
+
+    <!-- Ambulance -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-red">🚑</div>
+        <div class="agency-info">
+          <div class="agency-name">Kenya Red Cross Ambulance</div>
+          <div class="agency-desc">Medical emergencies & injuries</div>
+        </div>
+        <div class="agency-number">1199</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">Dial 1199 to reach the Kenya Red Cross ambulance service. It is free and available 24/7 nationwide. Call if someone is injured, unconscious, or in a medical emergency. Trained paramedics will respond.</div>
+        <a class="call-btn" href="tel:1199">📞 Call 1199 — Red Cross Ambulance</a>
+      </div>
+    </div>
+
+    <!-- Fire Service -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-orange">🚒</div>
+        <div class="agency-info">
+          <div class="agency-name">Nairobi Fire Service</div>
+          <div class="agency-desc">Fires & rescue operations</div>
+        </div>
+        <div class="agency-number">020-2222181</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">The Nairobi City County Fire Service puts out fires and rescues people from dangerous buildings or situations. If you see a fire, move away from the area and call immediately. Do not try to fight a fire yourself.</div>
+        <a class="call-btn" href="tel:0202222181">📞 Call Nairobi Fire Service</a>
+      </div>
+    </div>
+
+    <!-- Child helpline -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-purple">🧒</div>
+        <div class="agency-info">
+          <div class="agency-name">Child Helpline Kenya</div>
+          <div class="agency-desc">Child abuse, trafficking & exploitation</div>
+        </div>
+        <div class="agency-number">116</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">The Kenya Child Helpline (116) is a free, 24/7 line for children who are being abused, neglected, or exploited. If someone is hurting you, trafficking you, or you feel unsafe — call 116. Children who call are taken to safe houses run by the government.</div>
+        <a class="call-btn" href="tel:116">📞 Call 116 — Child Helpline</a>
+      </div>
+    </div>
+
+    <!-- Sexual/GBV -->
+    <div class="agency-card">
+      <div class="agency-main" onclick="toggleDetail(this)">
+        <div class="agency-icon ic-teal">💜</div>
+        <div class="agency-info">
+          <div class="agency-name">GBV & Sexual Assault Hotline</div>
+          <div class="agency-desc">Safe, confidential support</div>
+        </div>
+        <div class="agency-number">1195</div>
+      </div>
+      <div class="agency-detail">
+        <div class="detail-text">Kenya's national GBV hotline 1195 is free, confidential, and available 24/7. It supports survivors of sexual assault, domestic violence, and harmful practices like FGM. You can also send an SMS if you cannot speak. Counsellors can mobilise police and ambulances for you in emergencies.</div>
+        <a class="call-btn" href="tel:1195">📞 Call 1195 — GBV Hotline</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  /* ── Country toggle ── */
+  function setCountry(country) {
+    document.querySelectorAll('.country-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('section-' + country).classList.add('active');
+    document.getElementById('btn-' + country).classList.add('active');
+  }
+
+  /* ── Expand/collapse card detail ── */
+  function toggleDetail(mainEl) {
+    const detail = mainEl.nextElementSibling;
+    const isOpen = detail.classList.contains('open');
+
+    // Close all open cards first
+    document.querySelectorAll('.agency-detail.open').forEach(d => d.classList.remove('open'));
+
+    // Open this one if it wasn't already open
+    if (!isOpen) detail.classList.add('open');
+  }
+
+  /* ── Apply saved language on load ── */
+  const savedLang = localStorage.getItem('lang') || 'en';
+  setLang(savedLang);
+</script>
+</body>
+</html>
