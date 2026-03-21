@@ -476,9 +476,7 @@
   <div class="sos-zone">
     <div class="sos-outer-ring">
       <button class="sos-btn" id="sos-btn"
-        onpointerdown="startHold()"
-        onpointerup="endHold()"
-        onpointerleave="endHold()">
+        onclick = "triggerSOS()">
         <svg style="position:absolute;top:0;left:0;width:100%;height:100%;transform:rotate(-90deg)" viewBox="0 0 180 180">
           <circle id="progress-ring" cx="90" cy="90" r="84"
             fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="5"
@@ -486,7 +484,7 @@
             stroke-linecap="round"/>
         </svg>
         <span class="sos-label" id="sos-label">I am in Trouble!</span>
-        <span class="sos-sub"   id="sos-sub">HOLD 3 SEC</span>
+        <!-- <span class="sos-sub"   id="sos-sub">HOLD 3 SEC</span> -->
       </button>
     </div>
     <p class="sos-hint" id="sos-hint">Alerts your parent/guardian and nearest police station</p>
@@ -522,30 +520,29 @@
 
 <script>
   /* ── SOS hold (meant to be 3 seconds, but its not working) ── */
-  let holdTimer = null, animFrame = null, holdStart = null;
-  // const HOLD_DURATION = 3000;
-  const HOLD_DURATION = 3;
-  const CIRCUMFERENCE = 528;
+  // let holdTimer = null, animFrame = null, holdStart = null;
+  // // const HOLD_DURATION = 3000;
+  // const CIRCUMFERENCE = 528;
 
-  function startHold() {
-    holdStart = Date.now();
-    animateRing();
-    holdTimer = setTimeout(triggerSOS, HOLD_DURATION);
-  }
+  // function startHold() {
+  //   holdStart = Date.now();
+  //   animateRing();
+  //   holdTimer = setTimeout(triggerSOS, HOLD_DURATION);
+  // }
 
-  function animateRing() {
-    const elapsed  = Date.now() - holdStart;
-    const progress = Math.min(elapsed / HOLD_DURATION, 1);
-    const offset   = CIRCUMFERENCE - (CIRCUMFERENCE * progress);
-    document.getElementById('progress-ring').setAttribute('stroke-dashoffset', offset);
-    if (progress < 1) animFrame = requestAnimationFrame(animateRing);
-  }
+  // function animateRing() {
+  //   const elapsed  = Date.now() - holdStart;
+  //   const progress = Math.min(elapsed / HOLD_DURATION, 1);
+  //   const offset   = CIRCUMFERENCE - (CIRCUMFERENCE * progress);
+  //   document.getElementById('progress-ring').setAttribute('stroke-dashoffset', offset);
+  //   if (progress < 1) animFrame = requestAnimationFrame(animateRing);
+  // }
 
-  function endHold() {
-    clearTimeout(holdTimer);
-    cancelAnimationFrame(animFrame);
-    document.getElementById('progress-ring').setAttribute('stroke-dashoffset', CIRCUMFERENCE);
-  }
+  // function endHold() {
+  //   clearTimeout(holdTimer);
+  //   cancelAnimationFrame(animFrame);
+  //   document.getElementById('progress-ring').setAttribute('stroke-dashoffset', CIRCUMFERENCE);
+  // }
 
   function triggerSOS() {
     const btn = document.getElementById('sos-btn');
@@ -569,7 +566,7 @@
     en: {
       greetSmall:  'Good to see you,',
       sosLabel:    'I am in Trouble!',
-      sosSub:      'HOLD 3 SEC',
+      // sosSub:      'HOLD 3 SEC',
       sosHint:     'Alerts your parent/guardian and the police',
       btnTalk:     'I Need to Talk',
       btnTips:     'Safety Tips',
