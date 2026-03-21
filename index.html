@@ -63,7 +63,6 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px 22px 10px;
-      animation: fadeUp 0.4s ease both 0.05s;
     }
 
     .app-logo {
@@ -135,7 +134,6 @@
     /* ── Greeting ── */
     .greeting {
       padding: 6px 22px 18px;
-      animation: fadeUp 0.4s ease both 0.1s;
     }
     .greeting-small { color: var(--muted); font-size: 12px; font-weight: 600; }
     .greeting-name  { color: var(--text);  font-size: 22px; font-weight: 900; }
@@ -146,7 +144,6 @@
       flex-direction: column;
       align-items: center;
       padding: 0 22px 24px;
-      animation: fadeUp 0.4s ease both 0.18s;
     }
 
     @keyframes pulse-ring {
@@ -204,7 +201,6 @@
       justify-content: center;
       gap: 12px;
       padding: 0 18px 24px;
-      animation: fadeUp 0.4s ease both 0.28s;
     }
 
     .action-btn {
@@ -260,7 +256,6 @@
       cursor: pointer;
       text-decoration: none;
       transition: background 0.2s;
-      animation: fadeUp 0.4s ease both 0.35s;
     }
     .emerg-banner:active { background: #a00e2b; }
     .emerg-icon { font-size: 22px; }
@@ -276,7 +271,6 @@
       padding: 12px 0 28px;
       border-top: 1px solid #EDE8E0;
       background: var(--bg);
-      animation: fadeUp 0.4s ease both 0.42s;
     }
     .tab {
       display: flex;
@@ -524,7 +518,7 @@
     <span class="emerg-arrow">›</span>
   </a>
 
-  <!-- Tab bar -->
+  <!-- Tab bar
   <nav class="tab-bar">
     <a class="tab active" href="index.html">
       <span class="tab-icon">🏠</span>
@@ -546,14 +540,15 @@
       <span class="tab-icon">⚙️</span>
       <span class="tab-label" id="tab-settings">Settings</span>
     </a>
-  </nav>
+  </nav> -->
 
 </div>
 
 <script>
-  /* ── SOS hold (3 seconds) ── */
+  /* ── SOS hold (meant to be 3 seconds, but its not working) ── */
   let holdTimer = null, animFrame = null, holdStart = null;
-  const HOLD_DURATION = 3000;
+  // const HOLD_DURATION = 3000;
+  const HOLD_DURATION = 3;
   const CIRCUMFERENCE = 528;
 
   function startHold() {
