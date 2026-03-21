@@ -323,16 +323,9 @@
   <!-- Big SOS circle -->
   <div class="sos-zone">
     <div class="sos-outer-ring">
-      <a class="sos-btn" href="trouble.html"></a>
-        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;transform:rotate(-90deg)" viewBox="0 0 180 180">
-          <circle id="progress-ring" cx="90" cy="90" r="84"
-            fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="5"
-            stroke-dasharray="528" stroke-dashoffset="528"
-            stroke-linecap="round"/>
-        </svg>
+      <a class="sos-btn" href="sos.html">
         <span class="sos-label" id="sos-label">I am in Trouble!</span>
-        <!-- <span class="sos-sub"   id="sos-sub">HOLD 3 SEC</span> -->
-      </button>
+      </a>
     </div>
     <p class="sos-hint" id="sos-hint">Alerts your parent/guardian and nearest police station</p>
   </div>
@@ -391,22 +384,24 @@
   //   document.getElementById('progress-ring').setAttribute('stroke-dashoffset', CIRCUMFERENCE);
   // }
 
-  function triggerSOS() {
-    const btn = document.getElementById('sos-btn');
-    btn.style.background = '#cc0000';
-    document.getElementById('sos-label').textContent = 'SENDING ALERT...';
-    document.getElementById('sos-sub').textContent   = '';
-    document.getElementById('sos-hint').textContent  = 'Your guardian and police have been notified. Stay safe.';
+  // this is just a placeholder for now, will implement actual SOS logic later
+  // this sends an SOS alert.
+  // function triggerSOS() { 
+  //   const btn = document.getElementById('sos-btn');
+  //   btn.style.background = '#cc0000';
+  //   document.getElementById('sos-label').textContent = 'SENDING ALERT...';
+  //   document.getElementById('sos-sub').textContent   = '';
+  //   document.getElementById('sos-hint').textContent  = 'Your guardian and police have been notified. Stay safe.';
 
-    // TODO: Firebase + Twilio (or Africa's Talking) here
-    setTimeout(() => {
-      alert('🚨 SOS SENT!\n\nYour guardian has been alerted and your location shared.\n\nStay where you are if it is safe.');
-      btn.style.background = '';
-      document.getElementById('sos-label').textContent = langs[currentLang].sosLabel;
-      document.getElementById('sos-sub').textContent   = langs[currentLang].sosSub;
-      document.getElementById('sos-hint').textContent  = langs[currentLang].sosHint;
-    }, 1500);
-  }
+  //   // TODO: Firebase + Twilio (or Africa's Talking) here
+  //   setTimeout(() => {
+  //     alert('🚨 SOS SENT!\n\nYour guardian has been alerted and your location shared.\n\nStay where you are if it is safe.');
+  //     btn.style.background = '';
+  //     document.getElementById('sos-label').textContent = langs[currentLang].sosLabel;
+  //     document.getElementById('sos-sub').textContent   = langs[currentLang].sosSub;
+  //     document.getElementById('sos-hint').textContent  = langs[currentLang].sosHint;
+  //   }, 1500);
+  // }
 
   /* ── Language switcher ── */
   const langs = {
@@ -457,7 +452,7 @@
     const t = langs[lang];
     document.getElementById('greeting-small').textContent = t.greetSmall;
     document.getElementById('sos-label').textContent      = t.sosLabel;
-    document.getElementById('sos-sub').textContent        = t.sosSub;
+    // document.getElementById('sos-sub').textContent        = t.sosSub;
     document.getElementById('sos-hint').textContent       = t.sosHint;
     document.getElementById('btn-talk').textContent       = t.btnTalk;
     document.getElementById('btn-tips').textContent       = t.btnTips;
